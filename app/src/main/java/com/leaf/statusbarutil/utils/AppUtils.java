@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -18,6 +18,9 @@ import java.util.Locale;
  * Desc: 工具类
  */
 public class AppUtils {
+
+    private AppUtils() {
+    }
 
     private static Context mContext;
     private static Thread mUiThread;

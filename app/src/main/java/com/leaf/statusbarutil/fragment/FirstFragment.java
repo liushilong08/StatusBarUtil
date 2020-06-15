@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.R;
 
 /**
  * @author：created by leaf on 2019-05-07
@@ -27,9 +27,4 @@ public class FirstFragment extends Fragment {
         return new FirstFragment();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        StatusBarUtil.setTransparentForWindow(getActivity());
-    }
 }

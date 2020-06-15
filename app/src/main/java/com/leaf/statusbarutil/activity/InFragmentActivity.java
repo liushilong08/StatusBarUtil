@@ -1,4 +1,4 @@
-package com.leaf.statusbarutil;
+package com.leaf.statusbarutil.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import com.leaf.library.StatusBarUtil;
+import com.leaf.statusbarutil.fragment.FirstFragment;
+import com.leaf.statusbarutil.fragment.FourthFragment;
+import com.leaf.statusbarutil.R;
+import com.leaf.statusbarutil.fragment.SecondFragment;
+import com.leaf.statusbarutil.fragment.ThirdFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,18 +26,20 @@ import java.util.List;
 public class InFragmentActivity extends AppCompatActivity {
 
     private int mCurrentPos = -1;
-    private List<Fragment> mFragments = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.use_in_fragment);
 
-        mFragments = Arrays.asList(
+        StatusBarUtil.setTransparentForWindow(this);
+
+        mFragmentList = Arrays.asList(
                 FirstFragment.newInstance(),
-                SecondFragment.newInstance(0),
-                SecondFragment.newInstance(1),
-                SecondFragment.newInstance(2)
+                SecondFragment.newInstance(),
+                ThirdFragment.newInstance(),
+                FourthFragment.newInstance()
         );
 
         BottomNavigationView bottomMain = findViewById(R.id.bottom_main);
@@ -59,12 +68,12 @@ public class InFragmentActivity extends AppCompatActivity {
     private void switchFragmentIndex(int position) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (mCurrentPos != -1) {
-            fragmentTransaction.hide(mFragments.get(mCurrentPos));
+            fragmentTransaction.hide(mFragmentList.get(mCurrentPos));
         }
-        if (!mFragments.get(position).isAdded()) {
-            fragmentTransaction.add(R.id.fl_content, mFragments.get(position));
+        if (!mFragmentList.get(position).isAdded()) {
+            fragmentTransaction.add(R.id.fl_content, mFragmentList.get(position));
         }
-        fragmentTransaction.show(mFragments.get(position)).commit();
+        fragmentTransaction.show(mFragmentList.get(position)).commit();
         mCurrentPos = position;
     }
 
